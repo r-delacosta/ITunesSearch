@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.rdelacosta.itunessearch.R
 import com.rdelacosta.itunessearch.data.entities.Music
 import com.rdelacosta.itunessearch.databinding.ItemMusicBinding
 import com.squareup.picasso.Picasso
@@ -43,7 +44,8 @@ class MusicAdapter(private val listener: MusicItemListener) : ListAdapter<Music,
                 if (!musicObj.trackViewUrl.isNullOrEmpty()) {
                     Picasso.get()
                             .load(musicObj.artworkUrl100)
-                            //.placeholder(R.drawable.)
+                            .placeholder(R.drawable.progress_animation)
+                            .error(R.drawable.ic_baseline_error_24)
                             .into(imgThumbnail)
                 }
             }

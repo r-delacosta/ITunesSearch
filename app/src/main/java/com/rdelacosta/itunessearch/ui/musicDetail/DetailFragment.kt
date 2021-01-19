@@ -36,32 +36,36 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             textReleaseDate.text = viewModel.music?.releaseDate?.let { TimeFormatter.toDateFormat(it) }
             textGenre.text = viewModel.music?.primaryGenreName
             textExplicitness.text = viewModel.music?.trackExplicitness
-            Picasso.get().load(viewModel.music?.artworkUrl100).resize(200,200).into(imageView)
+            Picasso.get().load(viewModel.music?.artworkUrl100)
+                .placeholder(R.drawable.progress_animation)
+                .error(R.drawable.ic_baseline_error_24)
+                .resize(200,200)
+                .into(imageView)
         }
     }
 
     private fun setupListeners() {
         binding.textArtist.setOnClickListener() {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse(viewModel.music?.artistViewUrl))
+            intent.data = Uri.parse(viewModel.music?.artistViewUrl)
             startActivity(intent)
         }
 
         binding.textArtist.setOnClickListener() {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse(viewModel.music?.artistViewUrl))
+            intent.data = Uri.parse(viewModel.music?.artistViewUrl)
             startActivity(intent)
         }
 
         binding.textTrack.setOnClickListener() {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse(viewModel.music?.trackViewUrl))
+            intent.data = Uri.parse(viewModel.music?.trackViewUrl)
             startActivity(intent)
         }
 
         binding.textCollection.setOnClickListener() {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(Uri.parse(viewModel.music?.collectionViewUrl))
+            intent.data = Uri.parse(viewModel.music?.collectionViewUrl)
             startActivity(intent)
         }
     }
