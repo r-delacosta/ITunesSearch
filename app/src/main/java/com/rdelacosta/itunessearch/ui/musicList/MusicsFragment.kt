@@ -39,7 +39,13 @@ class MusicsFragment : Fragment(R.layout.fragment_musics), MusicAdapter.MusicIte
 
     private fun setupObservers() {
         viewModel.musics.observe(viewLifecycleOwner) {
-            musicAdapter.submitList(it)
+            if (!it.isNullOrEmpty()) {
+                musicAdapter.submitList(it)
+                binding.lastSearchTime.apply {
+                    visibility = View.VISIBLE
+                    text = "Last search time: " + it[0].createdDateFormatted
+                }
+            }
         }
 
         viewModel.progressBarState.observe(viewLifecycleOwner) { visible ->

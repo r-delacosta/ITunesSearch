@@ -27,7 +27,9 @@ class MusicsViewModel @ViewModelInject constructor(
                     val response = repository.searchTerm(query)
                     if (response.isSuccessful) {
                         repository.deleteDB()
-                        response.body()?.results?.let { repository.insertMusicListToDB(it) }
+                        response.body()?.results?.let {
+                            repository.insertMusicListToDB(it)
+                        }
                     } else {
                         responseInfo.postValue(response.message())
                     }

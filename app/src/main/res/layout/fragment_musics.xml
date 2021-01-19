@@ -19,6 +19,17 @@
             app:layout_constraintBottom_toTopOf="@+id/recyclerView"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/lastSearchTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textStyle="italic"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:text="TextView"
+            android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
