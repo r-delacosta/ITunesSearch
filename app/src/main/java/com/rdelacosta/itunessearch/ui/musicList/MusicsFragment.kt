@@ -2,14 +2,16 @@ package com.rdelacosta.itunessearch.ui.musicList
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rdelacosta.itunessearch.R
+import com.rdelacosta.itunessearch.data.entities.Music
 import com.rdelacosta.itunessearch.databinding.FragmentMusicsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 
 @AndroidEntryPoint
 class MusicsFragment : Fragment(R.layout.fragment_musics), MusicAdapter.MusicItemListener {
@@ -47,6 +49,13 @@ class MusicsFragment : Fragment(R.layout.fragment_musics), MusicAdapter.MusicIte
                 binding.progressBar.visibility = View.GONE
             }
         }
+
+        viewModel.responseInfo.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                viewModel.responseInfo.value = ""
+            }
+        }
     }
 
     private fun setupListeners() {
@@ -62,8 +71,9 @@ class MusicsFragment : Fragment(R.layout.fragment_musics), MusicAdapter.MusicIte
         })
     }
 
-    override fun onClickedItem(id: Long) {
-        Timber.d("on click: $id")
+    override fun onClickedItem(music: Music) {
+        val action = MusicsFragmentDirections.actionMusicsFragmentToDetailFragment(music)
+        findNavController().navigate(action)
     }
 
 }

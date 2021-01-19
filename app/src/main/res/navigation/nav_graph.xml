@@ -9,5 +9,18 @@
         android:id="@+id/musicsFragment"
         android:name="com.rdelacosta.itunessearch.ui.musicList.MusicsFragment"
         android:label="Music Search"
-        tools:layout="@layout/fragment_musics" />
+        tools:layout="@layout/fragment_musics" >
+        <action
+            android:id="@+id/action_musicsFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.rdelacosta.itunessearch.ui.musicDetail.DetailFragment"
+        android:label="Music Details"
+        tools:layout="@layout/fragment_detail">
+        <argument
+            android:name="music"
+            app:argType="com.rdelacosta.itunessearch.data.entities.Music" />
+    </fragment>
 </navigation>

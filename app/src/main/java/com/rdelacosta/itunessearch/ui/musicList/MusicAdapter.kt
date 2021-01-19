@@ -13,7 +13,7 @@ import com.squareup.picasso.Picasso
 class MusicAdapter(private val listener: MusicItemListener) : ListAdapter<Music, MusicAdapter.MusicViewHolder>(DiffCallback()) {
 
     interface MusicItemListener {
-        fun onClickedItem(id : Long)
+        fun onClickedItem(music : Music)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MusicViewHolder {
@@ -39,10 +39,10 @@ class MusicAdapter(private val listener: MusicItemListener) : ListAdapter<Music,
             binding.apply {
                 textArtist.text = musicObj.artistName
                 textTrack.text = musicObj.trackName
-                textPrice.text = musicObj.trackPrice
+                textPrice.text = musicObj.currency + musicObj.trackPrice
                 if (!musicObj.trackViewUrl.isNullOrEmpty()) {
                     Picasso.get()
-                            .load(musicObj.trackViewUrl)
+                            .load(musicObj.artworkUrl100)
                             //.placeholder(R.drawable.)
                             .into(imgThumbnail)
                 }
@@ -50,7 +50,7 @@ class MusicAdapter(private val listener: MusicItemListener) : ListAdapter<Music,
         }
 
         override fun onClick(v: View?) {
-            listener.onClickedItem(music.id)
+            listener.onClickedItem(music)
         }
     }
 
